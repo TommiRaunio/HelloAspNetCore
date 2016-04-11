@@ -18,6 +18,8 @@ namespace HelloAspNetCore
         {
             services.AddTransient<IHslConnector, HslConnector>();
             services.AddTransient<IHslRouteSolver, HslRouteSolver>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,6 +31,7 @@ namespace HelloAspNetCore
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+            
         }
 
         // Entry point for the application.
