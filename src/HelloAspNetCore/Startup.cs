@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloAspNetCore.Services.HSL;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
@@ -15,6 +16,8 @@ namespace HelloAspNetCore
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IHslConnector, HslConnector>();
+            services.AddTransient<IHslRouteSolver, HslRouteSolver>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

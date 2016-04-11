@@ -3,12 +3,31 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace HelloAspNetCore.Services.HSL
 {
-    public class HslConnector : HttpClient
+    public interface IHslConnector
+    {
+        /// <summary>
+        /// Example: api.reittiopas.fi/hsl/prod/?request=route&user=<user>&pass=<pass>&format=txt&from=2548196,6678528&to=2549062,6678638
+        /// </summary>
+        /// <param name="fromCoordinates"></param>
+        /// <param name="toCoordinates"></param>
+        /// <returns></returns>
+        Task<String> GetRoute(string fromCoordinates, string toCoordinates);
+
+        /// <summary>
+        /// Example: http://api.reittiopas.fi/hsl/prod/?request=lines&user=<id>&pass=<pw>&format=txt&query=2052%20%201|Tapiola
+        /// </summary>
+        /// <param name="lineCode"></param>
+        /// <returns></returns>
+        Task<String> GetLine(string lineCode);
+    }
+
+    public class HslConnector : HttpClient, IHslConnector
     {
         private string _password;
         private string _userId;
