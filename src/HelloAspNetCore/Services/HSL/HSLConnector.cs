@@ -28,8 +28,6 @@ namespace HelloAspNetCore.Services.HSL
         {
             try
             {
-
-
                 var fileContent =
                     System.IO.File.ReadLines(Path.Combine(_appEnvironment.ApplicationBasePath, "Identity.txt"));
                 var splitContent = fileContent.First().Split(',');
@@ -63,9 +61,8 @@ namespace HelloAspNetCore.Services.HSL
         public async Task<String> GetRoute(string fromCoordinates, string toCoordinates)
         {
 
-            var requestUrl = string.Format("?request=route&{0}&{1}&from={2}&to={3}", GetFormatForGET(),
-                GetIdentityStringForGET(), fromCoordinates, toCoordinates);
-            return await CallHSL(requestUrl);
+            var requestUrl = $"?request=route&{GetFormatForGET()}&{GetIdentityStringForGET()}&from={fromCoordinates}&to={toCoordinates}";
+            return await CallHsl(requestUrl);
 
         }
 
@@ -76,14 +73,13 @@ namespace HelloAspNetCore.Services.HSL
         /// <returns></returns>
         public async Task<String> GetLine(string lineCode)
         {
-            var requestUrl = string.Format("?request=lines&{0}&{1}&query={2}", GetIdentityStringForGET(),
-                GetFormatForGET(), lineCode);
-            return await CallHSL(requestUrl);
+            var requestUrl = $"?request=lines&{GetIdentityStringForGET()}&{GetFormatForGET()}&query={lineCode}";
+            return await CallHsl(requestUrl);
 
         }
 
 
-        private async Task<string> CallHSL(string requestUrl)
+        private async Task<string> CallHsl(string requestUrl)
         {
             var response = await GetAsync(requestUrl);
             return response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : null;
