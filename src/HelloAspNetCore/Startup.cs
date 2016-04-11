@@ -32,9 +32,9 @@ namespace HelloAspNetCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseIISPlatformHandler();
-
             app.UseDeveloperExceptionPage();
+
+            app.UseIISPlatformHandler();            
 
             app.UseStaticFiles();
 
@@ -45,9 +45,26 @@ namespace HelloAspNetCore
                    template: "{controller=Home}/{action=Index}/{id?}");
            });
 
-        }
+            //Domain specific initialization
+            AddCoordinates();
+            AddRouteOrigins();
+    }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+    protected void AddCoordinates()
+    {
+        HslCoordinateBank.AddCoordinatesFor(LocationEnum.Home, "2545370,6679959");
+            HslCoordinateBank.AddCoordinatesFor(LocationEnum.KaroliinanWork, "2547800,6679751");
+            HslCoordinateBank.AddCoordinatesFor(LocationEnum.TomminWork, "2552077,6673617");
+    }
+
+    protected void AddRouteOrigins()
+    {
+        RouteBank.Add(LocationEnum.Home, "Rautakiskonkuja 2");
+        RouteBank.Add(LocationEnum.KaroliinanWork, "Pitäjänmäen peruskoulu");
+        RouteBank.Add(LocationEnum.TomminWork, "Arkadianmäki");
+    }
+
+    // Entry point for the application.
+    public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
