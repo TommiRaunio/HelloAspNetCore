@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloAspNetCore.Models.Pages;
+using HelloAspNetCore.Services;
 using HelloAspNetCore.Services.HSL;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -25,6 +27,7 @@ namespace HelloAspNetCore
         {
             services.AddTransient<IHslConnector, HslConnector>();
             services.AddTransient<IHslRouteSolver, HslRouteSolver>();
+            services.AddTransient<ILayoutFactory, LayoutFactory>();
 
             services.AddMvc();
         }

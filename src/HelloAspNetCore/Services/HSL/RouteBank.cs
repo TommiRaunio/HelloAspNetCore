@@ -1,28 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HelloAspNetCore.JsonClasses;
+using HelloAspNetCore.Models;
 
 namespace HelloAspNetCore.Services.HSL
 {
     public class RouteBank
     {
-        private static Dictionary<LocationEnum, RouteOrigin> _locations;
+        private static Dictionary<LocationEnum, Location> _locations;
 
-        private static Dictionary<LocationEnum, RouteOrigin> Locations
-        {
-            get { return _locations ?? (_locations = new Dictionary<LocationEnum, RouteOrigin>()); }
-        }
+        private static Dictionary<LocationEnum, Location> Locations => _locations ?? (_locations = new Dictionary<LocationEnum, Location>());
 
         public static void Add(LocationEnum location, string friendlyName)
         {
-            Locations.Add(location, new RouteOrigin()
+            Locations.Add(location, new Location()
             {
                 FriendlyName = friendlyName,
-                Location = location,
+                LocationId = location,
             });
         }
 
-        public static List<RouteOrigin> GetAll()
+        public static List<Location> GetAll()
         {
             return Locations.Values.ToList();
         }
