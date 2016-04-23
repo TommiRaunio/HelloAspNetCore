@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloAspNetCore.JsonClasses;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 
 namespace HelloAspNetCore.Services.HSL
@@ -16,22 +17,29 @@ namespace HelloAspNetCore.Services.HSL
     {
         //Should handle proper dispose
         private readonly IHslConnector _connector;
+        private IMemoryCache _cache;
 
-        public HslRouteSolver(IHslConnector connector)
+        public HslRouteSolver(IHslConnector connector, IMemoryCache cache)
         {
             _connector = connector;
+            _cache = cache;
         }
 
         private string CacheKeyFor(LocationEnum from, LocationEnum to)
         {
-            return $"{@from.ToString()}-{to.ToString()}";
+            return $"{@from}-{to}";
         }
 
         public async Task<List<HSLRoute>> GetRoute(LocationEnum from, LocationEnum to)
         {
-
+            
             List<HSLRoute> listOfRoutes = null;
-            listOfRoutes = await GetRouteFromHsl(from, to);
+
+            if (!_cache.TryGetValue(CacheKeyFor(from, to), out listOfRoutes))
+            {
+                listOfRoutes = await GetRouteFromHsl(from, to);
+                _cache.Set(CacheKeyFor(from, to), listOfRoutes, new MemoryCacheEntryOptions()); // Define options
+            }            
             return listOfRoutes;
 
         }

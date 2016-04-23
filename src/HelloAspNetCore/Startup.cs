@@ -30,6 +30,8 @@ namespace HelloAspNetCore
             services.AddTransient<ILayoutFactory, LayoutFactory>();
 
             services.AddMvc();
+
+            services.AddCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
