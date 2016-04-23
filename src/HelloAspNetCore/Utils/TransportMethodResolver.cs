@@ -7,7 +7,7 @@ namespace HelloAspNetCore.Utils
 {
     public static class TransportMethodResolver
     {
-        private static readonly string[] _buses = new string[] {"1", "3", "4", "5", "21", "22", "23", "24", "25", "36", "39"};
+        private static readonly string[] _buses = new string[] {"1", "3", "4", "5", "8", "21", "22", "23", "24", "25", "36", "39"};
         private const string _trains = "12";
         private const string _metro = "6";
         private const string _tram = "2";

@@ -19,6 +19,11 @@
             {
                 i += 1;
                 <div class="col-lg-4 col-sm-12">
+                    @{
+                        var startTime = route.legs.FirstOrDefault()?.locs.FirstOrDefault()?.depTime.GetLast(4).Insert(2, ".");
+                        var endTime = route.legs.LastOrDefault()?.locs.LastOrDefault()?.arrTime.GetLast(4).Insert(2, ".");
+                    }
+
                     <h3>Reitti @i</h3>
                     <table class="table">
                         <tbody>
@@ -34,6 +39,14 @@
                             <td>Pituus</td>
                             <td>@Math.Round(route.length/1000, 2)km </td>
                         </tr>
+                        <tr>
+                            <td>Lähtö</td>
+                            <td>@startTime </td>
+                        </tr>
+                        <tr>
+                            <td>Perillä</td>
+                            <td>@endTime </td>
+                        </tr>
                         @foreach (var leg in route.legs)
                         {
                             <tr>
@@ -41,7 +54,7 @@
                                 <td>
                                     <ul class="list-unstyled">
                                         <li>
-                                            Pituus: @Math.Round((decimal)leg.length/1000, 2)km
+                                            Pituus: @Math.Round((decimal) leg.length/1000, 2)km
                                         </li>
                                         <li>
                                             Kesto: @TimeSpan.FromSeconds(leg.duration).ToString("g")
@@ -50,9 +63,9 @@
                                         {
                                             <li>
                                                 Numero: @leg.shortCode
-                                            </li>                                            
+                                            </li>
                                         }
-                                    </ul> 
+                                    </ul>
                                 </td>
                             </tr>
                         }
