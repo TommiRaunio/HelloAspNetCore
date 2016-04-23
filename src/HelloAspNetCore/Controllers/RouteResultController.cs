@@ -25,11 +25,13 @@ namespace HelloAspNetCore.Controllers
 
         public async Task<IActionResult> Index(LocationEnum from, LocationEnum to)
         {
-            //var route = await _hslRouteSolver.GetRoute(from, to);
+            var routes = _hslRouteSolver.GetRoute(from, to);
             var resultPage = new RouteResultPage
             {
                 Layout = _layoutFactory.Create()
             };
+
+            resultPage.Routes = await routes;
             return View("~/Views/Pages/RouteResult.cshtml", resultPage);
         }
     }
