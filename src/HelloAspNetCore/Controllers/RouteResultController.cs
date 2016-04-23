@@ -2,18 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloAspNetCore.Models.Pages;
+using HelloAspNetCore.Services;
+using HelloAspNetCore.Services.HSL;
 using Microsoft.AspNet.Mvc;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HelloAspNetCore.Controllers
 {
     [Route("HaeReitti")]
     public class RouteResultController : Controller
     {
-        public IActionResult Index()
+
+        private readonly IHslRouteSolver _hslRouteSolver;
+        private readonly ILayoutFactory _layoutFactory;
+
+        public RouteResultController(IHslRouteSolver hslRouteSolver, ILayoutFactory layoutFactory)
         {
-            return View("~/Views/Pages/RouteResult.cshtml");
+            _hslRouteSolver = hslRouteSolver;
+            _layoutFactory = layoutFactory;
+        }
+
+        public async Task<IActionResult> Index(LocationEnum from, LocationEnum to)
+        {
+            //var route = await _hslRouteSolver.GetRoute(from, to);
+            var resultPage = new RouteResultPage
+            {
+                Layout = _layoutFactory.Create()
+            };
+            return View("~/Views/Pages/RouteResult.cshtml", resultPage);
         }
     }
 }

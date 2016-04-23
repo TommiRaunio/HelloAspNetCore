@@ -62,9 +62,9 @@ namespace HelloAspNetCore
 
     protected void AddRouteOrigins()
     {
-        RouteBank.Add(LocationEnum.Home, "Rautakiskonkuja 2");
-        RouteBank.Add(LocationEnum.KaroliinanWork, "Pitäjänmäen peruskoulu");
-        RouteBank.Add(LocationEnum.TomminWork, "Arkadianmäki");
+        LocationBank.Add(LocationEnum.Home, "Rautakiskonkuja 2");
+        LocationBank.Add(LocationEnum.KaroliinanWork, "Pitäjänmäen peruskoulu");
+        LocationBank.Add(LocationEnum.TomminWork, "Arkadianmäki");
     }
 
     // Entry point for the application.

@@ -9,5 +9,11 @@ namespace HelloAspNetCore.Models
     public class Layout
     {
         public List<LocationPair> Routes { get; set; }
+        public Layout()
+        {
+            Routes = new List<LocationPair>();
+        }
+
     }
+
 }

@@ -33,9 +33,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    @*<li>@Html.ActionLink("Reitti with HTMLhelper", "Index", "HslRoute", new {from = 1, to = 2})</li>*@
+                    @foreach (var locationPair in @Model.Layout.Routes)
+                    {
+                        <li>
+                            @Html.ActionLink("Reitti with HTMLhelper", "Index", "HslRoute", new {from = @locationPair.From.LocationId, to = @locationPair.To.LocationId})
+                            <a asp-controller="RouteResult" asp-action="Index" asp-route-from="@locationPair.From.LocationId" asp-route-to="@locationPair.To.LocationId">@locationPair.From.FriendlyName -> @locationPair.To.FriendlyName</a>
+                        </li>
+                    }
+
+                    @*<li>@Html.ActionLink("Reitti with HTMLhelper", "Index", "HslRoute", new {from = 1, to = 2})</li>
                     <li><a href="@Url.Action("RouteResult", "Index")"></a></li>
-                    <li><a asp-controller="RouteResult" asp-action="Index" asp-route-from="2" asp-route-to="2">Tag helper</a></li>
+                    <li><a asp-controller="RouteResult" asp-action="Index" asp-route-from="2" asp-route-to="2">Tag helper</a></li>*@
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

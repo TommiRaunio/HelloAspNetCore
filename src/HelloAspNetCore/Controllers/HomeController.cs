@@ -22,7 +22,7 @@ namespace HelloAspNetCore.Controllers
             //var result = await _hslRouteSolver.GetRoute(LocationEnum.Home, LocationEnum.TomminWork);
 
             var homePage = new HomePage();
-            var layout =_layoutFactory.Create();
+            homePage.Layout = _layoutFactory.Create();
 
             return View("~/Views/Pages/Home.cshtml", homePage);
         }

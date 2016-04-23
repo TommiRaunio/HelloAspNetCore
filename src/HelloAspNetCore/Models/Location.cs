@@ -4,7 +4,7 @@ namespace HelloAspNetCore.Models
 {
     public class Location
     {
-        public LocationEnum LocationId { get; set; }
+        public int LocationId { get; set; }
         public string FriendlyName { get; set; }
 
     }

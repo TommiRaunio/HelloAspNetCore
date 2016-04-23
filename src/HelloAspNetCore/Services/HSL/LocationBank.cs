@@ -5,7 +5,7 @@ using HelloAspNetCore.Models;
 
 namespace HelloAspNetCore.Services.HSL
 {
-    public class RouteBank
+    public class LocationBank
     {
         private static Dictionary<LocationEnum, Location> _locations;
 
@@ -16,8 +16,13 @@ namespace HelloAspNetCore.Services.HSL
             Locations.Add(location, new Location()
             {
                 FriendlyName = friendlyName,
-                LocationId = location,
+                LocationId = (int)location,
             });
+        }
+
+        public static Location Get(LocationEnum location)
+        {
+            return _locations[location];
         }
 
         public static List<Location> GetAll()
