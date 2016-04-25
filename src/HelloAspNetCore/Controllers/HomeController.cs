@@ -19,8 +19,6 @@ namespace HelloAspNetCore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //var result = await _hslRouteSolver.GetRoute(LocationEnum.Home, LocationEnum.TomminWork);
-
             var homePage = new HomePage();
             homePage.Layout = _layoutFactory.Create();
 
