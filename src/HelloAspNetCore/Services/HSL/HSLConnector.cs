@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace HelloAspNetCore.Services.HSL
@@ -33,10 +34,11 @@ namespace HelloAspNetCore.Services.HSL
         private string _userId;
         private string _baseAddress = "http://api.reittiopas.fi/hsl/prod/";
         private readonly IApplicationEnvironment _appEnvironment;
+        private readonly HSLSettings _hslSettings;
 
-        public HslConnector(IApplicationEnvironment appEnvironment)
+        public HslConnector(IOptions<HSLSettings> hslSettings)
         {
-            _appEnvironment = appEnvironment;
+            _hslSettings = hslSettings.Value;
             BaseAddress = new Uri(_baseAddress);
             DefaultRequestHeaders.Accept.Clear();
             DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -47,9 +49,7 @@ namespace HelloAspNetCore.Services.HSL
         {
             try
             {
-                var fileContent =
-                    System.IO.File.ReadLines(Path.Combine(_appEnvironment.ApplicationBasePath, "Identity.txt"));
-                var splitContent = fileContent.First().Split(',');
+                var splitContent = _hslSettings.UserIdString.Split(',');
                 _userId = splitContent.First();
                 _password = splitContent.Last();
 
