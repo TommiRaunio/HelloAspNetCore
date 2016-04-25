@@ -70,16 +70,16 @@ namespace HelloAspNetCore
 
     protected void AddCoordinates()
     {
-        HslCoordinateBank.AddCoordinatesFor(LocationEnum.Home, "2545370,6679959");
-            HslCoordinateBank.AddCoordinatesFor(LocationEnum.KaroliinanWork, "2547800,6679751");
-            HslCoordinateBank.AddCoordinatesFor(LocationEnum.TomminWork, "2552077,6673617");
+        HslCoordinateBank.AddCoordinatesFor(LocationEnum.Start, "2545370,6679959");
+            HslCoordinateBank.AddCoordinatesFor(LocationEnum.School, "2547800,6679751");
+            HslCoordinateBank.AddCoordinatesFor(LocationEnum.Solita, "2552077,6673617");
     }
 
     protected void AddRouteOrigins()
     {
-        LocationBank.Add(LocationEnum.Home, "Rautakiskonkuja 2");
-        LocationBank.Add(LocationEnum.KaroliinanWork, "Pitäjänmäen peruskoulu");
-        LocationBank.Add(LocationEnum.TomminWork, "Arkadianmäki");
+        LocationBank.Add(LocationEnum.Start, "Vallikallio, Espoo");
+        LocationBank.Add(LocationEnum.School, "Pitäjänmäki");
+        LocationBank.Add(LocationEnum.Solita, "Solita");
     }
 
     // Entry point for the application.

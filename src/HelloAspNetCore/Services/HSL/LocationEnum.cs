@@ -3,9 +3,8 @@
     public enum LocationEnum
     {
         Unset = 0,
-        Home = 1,
-        TomminWork = 2,
-        KaroliinanWork = 3
-
+        Start = 1,
+        Solita = 2,
+        School = 3
     }
 }

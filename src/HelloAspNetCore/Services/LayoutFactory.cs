@@ -21,14 +21,26 @@ namespace HelloAspNetCore.Services
             
             layout.Routes.Add(new LocationPair()
             {
-                From = LocationBank.Get(LocationEnum.Home),
-                To = LocationBank.Get(LocationEnum.TomminWork)
+                From = LocationBank.Get(LocationEnum.Start),
+                To = LocationBank.Get(LocationEnum.Solita)
             });
 
             layout.Routes.Add(new LocationPair()
             {
-                From = LocationBank.Get(LocationEnum.TomminWork),
-                To = LocationBank.Get(LocationEnum.Home)
+                From = LocationBank.Get(LocationEnum.Solita),
+                To = LocationBank.Get(LocationEnum.Start)
+            });
+
+            layout.Routes.Add(new LocationPair()
+            {
+                From = LocationBank.Get(LocationEnum.School),
+                To = LocationBank.Get(LocationEnum.Solita)
+            });
+
+            layout.Routes.Add(new LocationPair()
+            {
+                From = LocationBank.Get(LocationEnum.Solita),
+                To = LocationBank.Get(LocationEnum.School)
             });
 
             return layout;

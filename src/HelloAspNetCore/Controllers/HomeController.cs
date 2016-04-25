@@ -17,7 +17,7 @@ namespace HelloAspNetCore.Controllers
             _layoutFactory = layoutFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var homePage = new HomePage();
             homePage.Layout = _layoutFactory.Create();

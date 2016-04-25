@@ -33,7 +33,6 @@ namespace HelloAspNetCore.Services.HSL
         private string _password;
         private string _userId;
         private string _baseAddress = "http://api.reittiopas.fi/hsl/prod/";
-        private readonly IApplicationEnvironment _appEnvironment;
         private readonly HSLSettings _hslSettings;
 
         public HslConnector(IOptions<HSLSettings> hslSettings)
